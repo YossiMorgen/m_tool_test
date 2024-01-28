@@ -1,0 +1,13 @@
+<form [formGroup]="toolForm" (submit)="onSubmit()">
+    <label>
+        <span>Name:</span>
+        <input type="text" formControlName="name">
+    </label>
+    <label>
+        <span>Sub Technology:</span>
+        <select formControlName="sub_technology_id">
+            <option *ngFor="let subTechnologies of subTechnologies" [value]="subTechnologies.id">{{subTechnologies.name}}</option>
+        </select>
+    </label>
+    <button>submit</button>
+</form>

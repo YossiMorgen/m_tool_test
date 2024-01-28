@@ -1,0 +1,11 @@
+<form [formGroup]="technologyForm" (submit)="onSubmit()">
+    <label>
+        <span>Name:</span>
+        <input type="text" formControlName="name">
+    </label>
+    <label>
+        <span>Code:</span>
+        <input type="text" formControlName="m_code">
+    </label>
+    <button>submit</button>
+</form>

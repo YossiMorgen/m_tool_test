@@ -1,0 +1,25 @@
+<form [formGroup]="measurementToolForm" (submit)="onSubmit()">
+    <label>
+        <span>Name:</span>
+        <input type="text" formControlName="name">
+    </label>
+    <label>
+        <span>Min Value:</span>
+        <input type="number" formControlName="minValue">
+    </label>
+    <label>
+        <span>Max Value:</span>
+        <input type="number" formControlName="maxValue">
+    </label>
+    <label>
+        <span>Uncertainty:</span>
+        <input type="number" formControlName="uncertainty">
+    </label>
+    <label>
+        <span>Measurement Field:</span>
+        <select formControlName="measurement_unit_id">
+            <option *ngFor="let measurementField of measurementFields" [value]="measurementField.id">{{measurementField.name}}</option>
+        </select>
+    </label>
+    <button>submit</button>
+</form>
