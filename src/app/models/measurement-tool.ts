@@ -1,4 +1,5 @@
 import { MeasurementField } from "./measurement-field";
+import { MeasurementUnit } from "./measurement-unit";
 
 export class MeasurementTool {
     public id: number;
@@ -8,6 +9,8 @@ export class MeasurementTool {
     public minValue: number;
     public maxValue: number;
     public uncertainty: number;
+    public uncertaintyMeasurementUnitId: number;
+    public uncertaintyMeasurementUnit: MeasurementUnit;
 
     constructor(name: string, minValue: number, maxValue: number, measurementUnitId: number, uncertainty: number) {
         this.measurementFieldId = measurementUnitId;

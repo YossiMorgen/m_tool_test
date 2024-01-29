@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Tools } from '../models/tools';
 import { SubTechnologyService } from './sub-technology.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class ToolsService {
     new Tools('Herramienta 3', 3, 3),
     new Tools('Herramienta 4', 4, 4)
   ];
+
+  public toolsListener: Subject<Tools[]> = new Subject<Tools[]>();
 
   constructor( private subTechnologyService: SubTechnologyService ) {
     let id = 0;
@@ -34,5 +37,7 @@ export class ToolsService {
     tool.id = this.tools[this.tools.length - 1].id + 1;
     tool.sub_technology = this.subTechnologyService.getSubTechnology(tool.sub_tech_id);
     this.tools.push(tool);
+
+    this.toolsListener.next(this.tools);
   }
 }

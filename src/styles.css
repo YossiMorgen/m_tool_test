@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+You can add global styles to this file, and also import other style files
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 10%;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+mat-form-field{
+    /* width: 100%; */
+    margin: 20px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding: 15px;}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #6a766a;
+    color: white;
+}
+
+th, td {
+    text-align: right;
+    padding: 8px;
+}

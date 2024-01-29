@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SubTechnology } from '../models/sub-technology';
 import { TechnologyService } from './technology.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class SubTechnologyService {
     new SubTechnology('Sub-Tecnología 3', '3', 3),
     new SubTechnology('Sub-Tecnología 4', '4', 4)
   ];
+
+  public subTechnologiesListener: Subject<SubTechnology[]> = new Subject<SubTechnology[]>();
+
   constructor(private technologyService: TechnologyService) {
     let id = 0
     this.subTechnologies.forEach(subTechnology => {
@@ -33,5 +37,7 @@ export class SubTechnologyService {
     subTechnology.id = this.subTechnologies[this.subTechnologies.length - 1].id + 1;
     subTechnology.technology = this.technologyService.technologies.find(technology => technology.id === subTechnology.technology_id);    
     this.subTechnologies.push(subTechnology);
+
+    this.subTechnologiesListener.next(this.subTechnologies);
   }
 }

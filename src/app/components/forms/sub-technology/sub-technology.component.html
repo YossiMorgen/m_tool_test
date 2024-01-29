@@ -1,5 +1,5 @@
 <form [formGroup]="subTechnologyForm" (submit)="onSubmit()">
-    <label>
+    <!-- <label>
         <span>Name:</span>
         <input type="text" formControlName="name">
     </label>
@@ -12,6 +12,34 @@
         <select formControlName="technology_id">
             <option *ngFor="let technology of technologies" [value]="technology.id">{{technology.name}}</option>
         </select>
-    </label>
-    <button>submit</button>
+    </label> -->
+
+    <mat-form-field>
+        <mat-label>Name:</mat-label>
+        <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Code:</mat-label>
+        <input matInput type="text" formControlName="m_code">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Technology:</mat-label>
+        <mat-select formControlName="technology_id">
+            <mat-option *ngFor="let technology of technologies" [value]="technology.id">{{technology.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button>submit</button>
+
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> Code </th>
+            <th> Technology </th>
+        </tr>
+        <tr *ngFor="let subTechnology of subTechnologies">
+            <td> {{subTechnology.name}} </td>
+            <td> {{subTechnology.m_code}} </td>
+            <td> {{subTechnology.technology?.name}} </td>
+        </tr>
+    </table>
 </form>

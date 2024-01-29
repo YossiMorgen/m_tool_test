@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Tools } from 'src/app/models/tools';
 import { SubTechnologyService } from 'src/app/services/sub-technology.service';
@@ -9,7 +9,7 @@ import { ToolsService } from 'src/app/services/tools.service';
   templateUrl: './tools.component.html',
   styleUrls: ['./tools.component.css']
 })
-export class ToolsComponent {
+export class ToolsComponent implements OnInit {
   constructor(
     private formBuilder : FormBuilder, 
     private subTechnologyService: SubTechnologyService, 
@@ -17,6 +17,15 @@ export class ToolsComponent {
   ) { }
 
   subTechnologies = this.subTechnologyService.getSubTechnologies();
+
+  public tools: Tools[] = [];
+
+  ngOnInit(): void {
+    this.tools = this.toolsService.getTools();
+    this.toolsService.toolsListener.subscribe(tools => {
+      this.tools = tools;
+    });
+  }
 
   toolForm = this.formBuilder.group({
     name: [''],

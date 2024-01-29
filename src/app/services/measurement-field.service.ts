@@ -9,16 +9,17 @@ import { MeasurementUnitService } from './measurement-unit.service';
 export class MeasurementFieldService {
 
   public measurementsFields: MeasurementField[] = [
-    new MeasurementField('Campo de Medición 1', 1, 3, 1, 1),
-    new MeasurementField('Campo de Medición 2', 1, 3, 2, 2),
-    new MeasurementField('Campo de Medición 3', 1, 3, 3, 3),
-    new MeasurementField('Campo de Medición 4', 1, 3, 4, 4)
+    new MeasurementField('Campo de Medición 1', 1, 1, 3, 1, 1),
+    new MeasurementField('Campo de Medición 2', 1, 1, 3, 2, 2),
+    new MeasurementField('Campo de Medición 3', 1, 1, 3, 3, 3),
+    new MeasurementField('Campo de Medición 4', 1, 1, 3, 4, 4)
   ];
 
-  constructor(private measurementUnitService: MeasurementUnitService) {
+  constructor(private measurementUnitService: MeasurementUnitService, private toolsService: ToolsService) {
     let id = 0;
     this.measurementsFields.forEach(measurementField => {
       measurementField.id = id++;
+      measurementField.tool = this.toolsService.getTool(measurementField.toolId);
       measurementField.measurementUnit = this.measurementUnitService.getMeasurementUnit(measurementField.measurementUnitId);
     });
   }

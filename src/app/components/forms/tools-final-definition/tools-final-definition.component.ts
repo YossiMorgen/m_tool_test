@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToolsFinalDefinition } from 'src/app/models/tools-final-definition';
 import { MeasurementToolService } from 'src/app/services/measurement-tool.service';
@@ -10,7 +10,7 @@ import { ToolsService } from 'src/app/services/tools.service';
   templateUrl: './tools-final-definition.component.html',
   styleUrls: ['./tools-final-definition.component.css']
 })
-export class ToolsFinalDefinitionComponent {
+export class ToolsFinalDefinitionComponent implements OnInit{
 
   constructor(
     private formBuilder : FormBuilder, 
@@ -22,6 +22,14 @@ export class ToolsFinalDefinitionComponent {
   tools = this.toolsService.getTools();
   measurementTools = this.measurementToolService.getMeasurementTools();
 
+  toolsFinalDefinitions = this.toolsFinalDefinitionService.getToolsFinalDefinition();
+
+  ngOnInit(): void {
+    this.toolsFinalDefinitionService.toolsFinalDefinitionListener.subscribe(toolsFinalDefinition => {
+      this.toolsFinalDefinitions = toolsFinalDefinition;
+    });
+  }
+
   toolsFinalDefinitionForm = this.formBuilder.group({
     toolId: [0],
     measurementToolId: [0],
@@ -29,9 +37,16 @@ export class ToolsFinalDefinitionComponent {
     iso: [false],
   });
 
+  onSelectionChanged(event: any){
+    console.log(event.value);
+    this.measurementToolService.getMeasurementTools().forEach(measurementTool => console.log(measurementTool.measurementField?.toolId));
+    
+    this.measurementTools = this.measurementToolService.getMeasurementTools().filter(measurementTool => measurementTool.measurementField?.tool?.id == event.value);
+  }
+
   onSubmit(){
     this.toolsFinalDefinitionService.addToolFinalDefinition(
-      new ToolsFinalDefinition(this.toolsFinalDefinitionForm.value.toolId, 
+      new ToolsFinalDefinition(
       this.toolsFinalDefinitionForm.value.measurementToolId, 
       this.toolsFinalDefinitionForm.value.resolution, 
       this.toolsFinalDefinitionForm.value.iso)

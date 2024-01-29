@@ -1,13 +1,26 @@
 <form [formGroup]="toolForm" (submit)="onSubmit()">
-    <label>
-        <span>Name:</span>
-        <input type="text" formControlName="name">
-    </label>
-    <label>
-        <span>Sub Technology:</span>
-        <select formControlName="sub_technology_id">
-            <option *ngFor="let subTechnologies of subTechnologies" [value]="subTechnologies.id">{{subTechnologies.name}}</option>
-        </select>
-    </label>
-    <button>submit</button>
+    <mat-form-field>
+        <mat-label>Name:</mat-label>
+        <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Sub Technology:</mat-label>
+        <mat-select formControlName="sub_technology_id">
+            <mat-option *ngFor="let subTechnologies of subTechnologies" [value]="subTechnologies.id">{{subTechnologies.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button>submit</button>
+
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> Sub Technology </th>
+            <th> Technology </th>
+        </tr>
+        <tr *ngFor="let tool of tools">
+            <td> {{tool.name}} </td>
+            <td> {{tool.sub_technology?.name}} </td>
+            <td> {{tool.sub_technology?.technology?.name}} </td>
+        </tr>
+    </table>
 </form>

@@ -1,30 +1,45 @@
 <form [formGroup]="toolsFinalDefinitionForm" (submit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Tool:</mat-label>
+        <mat-select (selectionChange)="onSelectionChanged($event)" formControlName="toolId">
+            <mat-option *ngFor="let tool of tools" [value]="tool.id">{{tool.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Measurement Tool:</mat-label>
+        <mat-select formControlName="measurementToolId">
+            <mat-option *ngFor="let measurementTool of measurementTools" [value]="measurementTool.id">{{measurementTool.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Resolution:</mat-label>
+        <mat-select formControlName="resolution">
+            <mat-option value="0.2">0.2</mat-option>
+            <mat-option value="0.5">0.5</mat-option>
+            <mat-option value="0.7">0.7</mat-option>
+        </mat-select>
+    </mat-form-field>
     <label>
-        <span>Tool:</span>
-        <select formControlName="toolId">
-            <option *ngFor="let tool of tools" [value]="tool.id">{{tool.name}}</option>
-        </select>
+        <mat-label>ISO:</mat-label>
+        <mat-checkbox formControlName="iso"></mat-checkbox>
     </label>
+    
+    <button mat-button type="submit">Submit</button>
 
-    <label>
-        <span>Measurement Tool:</span>
-        <select formControlName="measurementToolId">
-            <option *ngFor="let measurementTool of measurementTools" [value]="measurementTool.id">{{measurementTool.name}}</option>
-        </select>
-    </label>
-
-    <label>
-        <span>Resolution:</span>
-        <select formControlName="resolution">
-            <option value="1">0.2</option>
-            <option value="1">0.5</option>
-            <option value="1">0.7</option>
-        </select>
-    </label>
-
-    <label>
-        <span>ISO:</span>
-        <input type="checkbox">
-    </label>
-    <button>submit</button>
+    <table>
+        <tr>
+            <th> Measurement Tool </th>
+            <th> Measurement Field </th>
+            <th> Tool</th>
+            <th> Resolution </th>
+            <th> ISO </th>
+        </tr>
+        <tr *ngFor="let toolFinalDefinition of toolsFinalDefinitions">
+            <td> {{toolFinalDefinition.measurementTool?.name}} </td>
+            <td> {{toolFinalDefinition.measurementTool?.measurementField?.name}} </td>
+            <td> {{toolFinalDefinition.measurementTool?.measurementField?.tool?.name}} </td>
+            <td> {{toolFinalDefinition.resolution}} </td>
+            <td> {{toolFinalDefinition.iso}} </td>
+        </tr>
+    </table>
 </form>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Technology } from '../models/technology';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class TechnologyService {
     new Technology('Tecnología 3', '3'),
     new Technology('Tecnología 4', '4')
   ];
+
+  public TechnologiesListener: Subject<Technology[]> = new Subject<Technology[]>();
 
   constructor() {
     let id = 0
@@ -31,5 +34,7 @@ export class TechnologyService {
   addTechnology(technology: Technology): void {
     technology.id = this.technologies[this.technologies.length - 1].id + 1;
     this.technologies.push(technology);
+
+    this.TechnologiesListener.next(this.technologies);
   }
 }

@@ -1,7 +1,7 @@
 <form [formGroup]="measurementUnitForm" (submit)="onSubmit()">
-    <label>
-        <span>Symbol:</span>
-        <input type="text" formControlName="symbol">
-    </label>
-    <button>submit</button>
+    <mat-form-field>
+        <mat-label>Symbol:</mat-label>
+        <input matInput type="text" formControlName="symbol">
+    </mat-form-field>
+    <button mat-button>submit</button>
 </form>
