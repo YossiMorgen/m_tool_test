@@ -41,7 +41,7 @@ export class ToolsFinalDefinitionComponent implements OnInit{
     console.log(event.value);
     this.measurementToolService.getMeasurementTools().forEach(measurementTool => console.log(measurementTool.measurementField?.toolId));
     
-    this.measurementTools = this.measurementToolService.getMeasurementTools().filter(measurementTool => measurementTool.measurementField?.tool?.id == event.value);
+    // this.measurementTools = this.measurementToolService.getMeasurementTools().filter(measurementTool => measurementTool.measurementField?.tool?.id == event.value);
   }
 
   onSubmit(){

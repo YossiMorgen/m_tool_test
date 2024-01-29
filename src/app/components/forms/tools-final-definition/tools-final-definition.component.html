@@ -1,10 +1,10 @@
 <form [formGroup]="toolsFinalDefinitionForm" (submit)="onSubmit()">
-    <mat-form-field>
+    <!-- <mat-form-field>
         <mat-label>Tool:</mat-label>
         <mat-select (selectionChange)="onSelectionChanged($event)" formControlName="toolId">
             <mat-option *ngFor="let tool of tools" [value]="tool.id">{{tool.name}}</mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field>
         <mat-label>Measurement Tool:</mat-label>
         <mat-select formControlName="measurementToolId">
